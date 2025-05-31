@@ -1,355 +1,473 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Welcome to DigitalWorld</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>welcome to digitalworld</title>
+      <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/ElH_LEMzUtOJNweZBZ1QAZZDHzxgSja6DKYCevqihEYWGHLM6eFIP1JDYR25QRbF1w=s48-rw">
+    <meta name="robots" content="noindex">
     <style>
-        /* Rainbow Text Animation */
-        .rainbow-text {
-            background: linear-gradient(
-                90deg,
-                #ff0000, #ff9900, #ffee00, #33ff00, #00ffee, #0066ff, #cc00ff, #ff0000
-            );
-            background-size: 400% 100%;
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            animation: fadeIn 0.8s ease-out;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        #jtvh1 h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
-            animation: rainbow 5s linear infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            letter-spacing: 1px;
         }
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        
+        #jtvh1 h1:hover {
+            transform: scale(1.05);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: pulse 1.5s infinite;
         }
-
-        /* Reset & base */
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1e1e2f;
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Header */
-        header {
-            background: #23234b;
-            padding: 28px 0 22px 0;
-            text-align: center;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.18);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.7rem;
-            letter-spacing: 2px;
-        }
-        header p {
-            margin: 8px 0 0;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        /* Navigation */
-        nav {
-            background: #2a2a4e;
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            padding: 13px 0;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.10);
-        }
-        nav a {
-            font-size: 1.12rem;
-            transition: text-shadow 0.3s;
-            position: relative;
-        }
-        nav a:hover {
-            text-shadow: 0 0 8px #fff, 0 0 16px #ff0;
-        }
-
-        /* Search bar */
-        .search-container {
-            max-width: 600px;
-            margin: 28px auto 0;
-            text-align: center;
-        }
-        .search-container input[type="text"] {
-            width: 80%;
-            max-width: 410px;
-            padding: 11px 18px;
-            font-size: 1.07rem;
-            border: 2px solid #ff9900;
+        
+        /* Telegram button in original colors */
+        .telegram-btn {
             border-radius: 25px;
-            outline: none;
-            transition: border-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
+            padding: 0;
+            overflow: hidden;
+            display: inline-block;
+            background: transparent; /* Removed blue gradient */
         }
-        .search-container input[type="text"]:focus {
-            border-color: #33ff00;
+        
+        .container {
+            background: transparent;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        /* Categories */
-        .categories {
-            max-width: 1000px;
-            margin: 32px auto 12px;
+        
+        .center {
+            text-align: center;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.8) 0%, transparent 20%);
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* Channel List Styles */
+        .controls {
             display: flex;
             justify-content: center;
-            gap: 18px;
+            gap: 15px;
+            margin: 20px 0;
             flex-wrap: wrap;
         }
-        .category {
-            background: #23234b;
-            padding: 10px 22px;
-            border-radius: 22px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.05rem;
-            user-select: none;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-        }
-        .category:hover, .category.active {
-            background: #2a2a4e;
-            box-shadow: 0 4px 16px #33ff00a1;
-        }
-
-        /* Container for cards */
-        .container {
-            max-width: 1050px;
-            margin: 22px auto 60px;
-            padding: 0 15px;
-        }
-
-        /* Cards grid */
-        .card-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
-            gap: 28px;
-        }
-        .card {
-            background: #23234b;
-            border-radius: 14px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-            overflow: hidden;
+        
+        .control-group {
             display: flex;
-            flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .card:hover {
-            transform: translateY(-9px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(255,0,255,0.13), 0 4px 18px rgba(0,0,0,0.18);
+        
+        select, input {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-family: inherit;
         }
-        .card img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 18px 22px 20px 22px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card-content h3 {
-            margin: 0 0 12px;
-            font-size: 1.26rem;
-        }
-        .card-content p {
-            flex-grow: 1;
-            font-size: 1.01rem;
-            margin-bottom: 18px;
-        }
-        .btn-download {
-            align-self: flex-start;
-            background: linear-gradient(90deg,#ff9900,#33ff00,#00ffee,#cc00ff,#ff0000);
-            color: #fff;
-            padding: 11px 24px;
-            border-radius: 26px;
-            font-weight: 700;
+        
+        button {
+            padding: 8px 20px;
+            border-radius: 20px;
             border: none;
-            font-size: 1.04rem;
+            background: linear-gradient(135deg, #ff4d4d, #f9cb28);
+            color: white;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 2px 8px #0002;
-            transition: background 0.3s, transform 0.2s;
-            background-size: 200% 100%;
-            animation: rainbow 3s linear infinite;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .btn-download:hover {
-            background-position: 100% 0;
-            transform: scale(1.07);
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-
-        /* Footer */
-        footer {
-            background: #23234b;
+        
+        button:disabled {
+            background: #ccc;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        #channel-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .channel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             text-align: center;
-            padding: 17px 0;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            position: fixed;
-            bottom: 0;
+            padding: 15px;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Modified logo container - removed circle */
+        .channel-logo-container {
             width: 100%;
+            height: 90px;
+            margin: 0 auto 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            box-sizing: border-box;
         }
-
-        /* Rainbow all text */
-        header h1, header p,
-        nav a,
-        .category,
-        .card-content h3,
-        .card-content p,
-        .btn-download,
-        footer {
-            /* Rainbow effect */
-            background: linear-gradient(
-                90deg,
-                #ff0000, #ff9900, #ffee00, #33ff00, #00ffee, #0066ff, #cc00ff, #ff0000
-            );
-            background-size: 400% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-            animation: rainbow 6s linear infinite;
+        
+        .channel-logo {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            transition: all 0.3s ease;
         }
-
-        /* Responsive tweaks */
-        @media (max-width: 700px) {
-            nav { gap: 13px; }
-            .search-container input[type="text"] { width: 97%; }
-            .categories { gap: 8px; }
-            .card-content { padding: 14px 10px 16px 10px; }
+        
+        .channel-card:hover .channel-logo {
+            transform: scale(1.05);
+        }
+        
+        .channel-name {
+            margin: 0;
+            font-weight: 600;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            #channel-list {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-group {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            #jtvh1 h1 {
+                font-size: 2.2rem;
+            }
+            
+            .channel-logo-container {
+                height: 80px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1 class="rainbow-text">Welcome to DigitalWorld</h1>
-        <p class="rainbow-text">Games and Apps for Android</p>
-    </header>
-
-    <nav>
-        <a href="#" class="rainbow-text">Home</a>
-        <a href="#" class="rainbow-text">Games</a>
-        <a href="#" class="rainbow-text">Apps</a>
-        <a href="#" class="rainbow-text">Contact</a>
-    </nav>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search games or apps..." onkeyup="filterCards()" />
+    <div id="jtvh1" class="center">
+     <B>   <h1>welcome to digitalworld</h1></B>
     </div>
-
-    <div class="categories" id="categories">
-        <div class="category rainbow-text active" onclick="filterCategory('all')">All</div>
-        <div class="category rainbow-text" onclick="filterCategory('games')">Games</div>
-        <div class="category rainbow-text" onclick="filterCategory('apps')">Apps</div>
-        <div class="category rainbow-text" onclick="filterCategory('featured')">Featured</div>
-    </div>
+    <center>
+        <!-- Telegram button with original image colors -->
+        <a href='https://t.me/dogitalworld' target='_blank' class="telegram-btn">
+            <img src="https://i.postimg.cc/KjZjJWRM/telegram.jpg" height="50" width="150" style="border-radius: 25px;">
+        </a>
+        <br>
+    </center>
+    <br>
 
     <div class="container">
-        <div class="card-list" id="cardList">
-            <div class="card" data-category="games" data-title="Adventure Quest">
-                <img src="https://via.placeholder.com/400x170?text=Adventure+Quest" alt="Adventure Quest" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Adventure Quest</h3>
-                    <p class="rainbow-text">An exciting adventure game with stunning graphics and immersive gameplay.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Adventure Quest')">Download</button>
-                </div>
+        <!-- M3U Player Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <input type="text" id="search-input" placeholder="Search channels..." autocomplete="off">
             </div>
-            <div class="card" data-category="apps" data-title="Photo Editor Pro">
-                <img src="https://via.placeholder.com/400x170?text=Photo+Editor+Pro" alt="Photo Editor Pro" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Photo Editor Pro</h3>
-                    <p class="rainbow-text">Edit your photos with professional tools and filters, easy and fast.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Photo Editor Pro')">Download</button>
-                </div>
+            <div class="control-group">
+                <select id="group-select">
+                    <option value="all">All Groups</option>
+                </select>
             </div>
-            <div class="card" data-category="games featured" data-title="Puzzle Mania">
-                <img src="https://via.placeholder.com/400x170?text=Puzzle+Mania" alt="Puzzle Mania" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Puzzle Mania</h3>
-                    <p class="rainbow-text">Challenge your brain with hundreds of puzzles and levels.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Puzzle Mania')">Download</button>
-                </div>
-            </div>
-            <div class="card" data-category="apps featured" data-title="Fitness Tracker">
-                <img src="https://via.placeholder.com/400x170?text=Fitness+Tracker" alt="Fitness Tracker" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Fitness Tracker</h3>
-                    <p class="rainbow-text">Track your workouts and stay motivated with this easy-to-use app.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Fitness Tracker')">Download</button>
-                </div>
-            </div>
-            <div class="card" data-category="games" data-title="Racing Thunder">
-                <img src="https://via.placeholder.com/400x170?text=Racing+Thunder" alt="Racing Thunder" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Racing Thunder</h3>
-                    <p class="rainbow-text">High speed racing game with realistic physics and multiple cars.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Racing Thunder')">Download</button>
-                </div>
-            </div>
-            <div class="card" data-category="apps" data-title="Weather Now">
-                <img src="https://via.placeholder.com/400x170?text=Weather+Now" alt="Weather Now" />
-                <div class="card-content">
-                    <h3 class="rainbow-text">Weather Now</h3>
-                    <p class="rainbow-text">Get real-time weather updates and forecasts for your location.</p>
-                    <button class="btn-download rainbow-text" onclick="alert('Downloading Weather Now')">Download</button>
-                </div>
+            <div class="control-group">
+                <button id="prev-page">Previous</button>
+                <span id="page-info" class="page-info">Loading...</span>
+                <button id="next-page">Next</button>
             </div>
         </div>
+        
+        <!-- Channel List -->
+        <div id="channel-list"></div>
     </div>
 
-    <footer class="rainbow-text">
-        &copy; 2025 DigitalWorld. All rights reserved.
-    </footer>
-
     <script>
-        // Filter cards by search input
-        function filterCards() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.card-list .card');
-
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title').toLowerCase();
-                if (title.includes(input)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
+        // Configuration
+        const CHANNELS_PER_PAGE = 50;
+        const DEFAULT_LOGO = 'https://i.ibb.co/k6mTy71V/x.jpg';
+        
+        // State variables
+        let channels = [];
+        let currentPage = 1;
+        let currentGroup = 'all';
+        let searchQuery = '';
+        
+        // DOM Elements
+        const channelList = document.getElementById('channel-list');
+        const searchInput = document.getElementById('search-input');
+        const groupSelect = document.getElementById('group-select');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const pageInfo = document.getElementById('page-info');
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load channels from M3U
+            loadChannels();
+            
+            // Setup event listeners
+            searchInput.addEventListener('input', handleSearch);
+            groupSelect.addEventListener('change', handleGroupChange);
+            prevPageBtn.addEventListener('click', goToPrevPage);
+            nextPageBtn.addEventListener('click', goToNextPage);
+        });
+        
+        // Load channels from M3U file
+        async function loadChannels() {
+            try {
+                pageInfo.textContent = 'Loading channels...';
+                
+                const response = await fetch('https://raw.githubusercontent.com/kaju72/My-website-/refs/heads/main/Movie.m3u');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                
+                const m3uData = await response.text();
+                channels = parseM3U(m3uData);
+                
+                // Populate group filter
+                populateGroupFilter();
+                
+                // Display first page
+                displayChannels();
+                
+            } catch (error) {
+                console.error('Error loading channels:', error);
+                pageInfo.textContent = 'Error loading channels. Please try again later.';
+                channelList.innerHTML = `<div class="error">Failed to load channels. ${error.message}</div>`;
+            }
+        }
+        
+        // Parse M3U file content
+        function parseM3U(data) {
+            const lines = data.split('\n');
+            const parsedChannels = [];
+            let currentChannel = {};
+            
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+                
+                if (trimmedLine.startsWith('#EXTINF:')) {
+                    // New channel starts
+                    if (currentChannel.name) {
+                        parsedChannels.push(currentChannel);
+                    }
+                    
+                    currentChannel = {};
+                    
+                    // Extract channel info
+                    const nameMatch = trimmedLine.match(/,(.+)$/);
+                    const logoMatch = trimmedLine.match(/tvg-logo="([^"]*)"/);
+                    const groupMatch = trimmedLine.match(/group-title="([^"]*)"/);
+                    
+                    currentChannel.name = nameMatch ? nameMatch[1].trim() : 'Unknown Channel';
+                    currentChannel.logo = logoMatch ? logoMatch[1] : DEFAULT_LOGO;
+                    currentChannel.group = groupMatch ? groupMatch[1] : 'Ungrouped';
+                    
+                } else if (trimmedLine && !trimmedLine.startsWith('#')) {
+                    // URL line
+                    currentChannel.url = trimmedLine;
+                }
+            }
+            
+            // Add the last channel
+            if (currentChannel.name) {
+                parsedChannels.push(currentChannel);
+            }
+            
+            return parsedChannels;
+        }
+        
+        // Populate group filter dropdown
+        function populateGroupFilter() {
+            // Get unique groups
+            const groups = [...new Set(channels.map(ch => ch.group))];
+            groups.sort();
+            
+            // Clear existing options
+            groupSelect.innerHTML = '<option value="all">All Groups</option>';
+            
+            // Add group options
+            groups.forEach(group => {
+                const option = document.createElement('option');
+                option.value = group;
+                option.textContent = group;
+                groupSelect.appendChild(option);
             });
         }
-
-        // Filter cards by category
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.card-list .card');
-            const categories = document.querySelectorAll('.category');
-
-            categories.forEach(cat => {
-                cat.classList.remove('active');
-                if (cat.textContent.toLowerCase() === category) {
-                    cat.classList.add('active');
-                }
+        
+        // Display channels based on current filters and page
+        function displayChannels() {
+            // Filter channels
+            const filteredChannels = channels.filter(channel => {
+                const matchesGroup = currentGroup === 'all' || channel.group === currentGroup;
+                const matchesSearch = !searchQuery || 
+                    channel.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesGroup && matchesSearch;
             });
-
-            cards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = '';
-                } else {
-                    const cardCategories = card.getAttribute('data-category').toLowerCase();
-                    if (cardCategories.includes(category)) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
+            
+            // Calculate pagination
+            const totalPages = Math.max(1, Math.ceil(filteredChannels.length / CHANNELS_PER_PAGE));
+            const startIdx = (currentPage - 1) * CHANNELS_PER_PAGE;
+            const endIdx = Math.min(startIdx + CHANNELS_PER_PAGE, filteredChannels.length);
+            const pageChannels = filteredChannels.slice(startIdx, endIdx);
+            
+            // Update UI
+            renderChannels(pageChannels);
+            updatePaginationControls(filteredChannels.length, totalPages);
+        }
+        
+        // Render channel cards
+        function renderChannels(channels) {
+            if (channels.length === 0) {
+                channelList.innerHTML = '<div class="no-results">No channels found matching your criteria.</div>';
+                return;
+            }
+            
+            channelList.innerHTML = channels.map(channel => `
+                <div class="channel-card" onclick="playStream('${encodeURIComponent(channel.url)}', '${encodeURIComponent(channel.name)}')">
+                    <div class="channel-logo-container">
+                        <img src="${channel.logo}" 
+                             alt="${channel.name}" 
+                             class="channel-logo"
+                             onerror="this.src='${DEFAULT_LOGO}'">
+                    </div>
+                    <p class="channel-name">${channel.name}</p>
+                </div>
+            `).join('');
+        }
+        
+        // Update pagination controls
+        function updatePaginationControls(totalChannels, totalPages) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages} (${totalChannels} channels)`;
+            prevPageBtn.disabled = currentPage <= 1;
+            nextPageBtn.disabled = currentPage >= totalPages;
+        }
+        
+        // Event handlers
+        function handleSearch(e) {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            displayChannels();
+        }
+        
+        function handleGroupChange(e) {
+            currentGroup = e.target.value;
+            currentPage = 1;
+            displayChannels();
+        }
+        
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayChannels();
+            }
+        }
+        
+        function goToNextPage() {
+            const filteredChannels = channels.filter(channel => {
+                const matchesGroup = currentGroup === 'all' || channel.group === currentGroup;
+                const matchesSearch = !searchQuery || 
+                    channel.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesGroup && matchesSearch;
             });
-
-            // Clear search input on category change
-            document.getElementById('searchInput').value = '';
+            
+            const totalPages = Math.max(1, Math.ceil(filteredChannels.length / CHANNELS_PER_PAGE));
+            
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayChannels();
+            }
+        }
+        
+        // Play stream function
+        function playStream(url, name) {
+            const playerUrl = `https://www.m3u8player.online/embed/dash?url=${url}`;
+            window.location.href = playerUrl;
         }
     </script>
 </body>

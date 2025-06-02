@@ -1,11 +1,10 @@
-Annu:
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <base href="http://onlinemkvplayer.com/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6, minimum-scale=1">
-<title>Play Video From URL | Online MKV Player </title>
+<title>GETAPKS-SUFIYAN</title>
 
 <meta name="keywords" content="Online mkv player from url free,
       Online mkv player from url android,
@@ -22,7 +21,79 @@ url video player online free," />
 <meta property="og:type" content="website" />
 <link rel="icon" type="image/png" href="favicon.png"/>
 <style>
-*{padding: 0px;margin: 0px;}body{margin:0;padding:0;border:0;min-width:320px;font-size:1.02em;height: 100vh;background-color: #010012;}#nav {background-color: #11061e;width:100%;height:70px;box-shadow: 0 0 18px rgba(0,0,0,1.3)!important;text-align: center;opacity: 0.9;}#nav h1 a{color:#2debd4;font-size: 30px;font-weight: 600;letter-spacing: 3px;text-decoration: none;}.glass-panel {background-color: rgba(255, 255, 255, 0.3);box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);border-radius: 10px;border: 1px solid rgba(255, 255, 255, 0.18);max-width: 640px;padding: 12px;}#player{opacity: 0.9;}.glass-panel input[type="text"], .glass-panel button {padding: 10px;border: none;border-radius: 5px;font-size: 1.01em;}.glass-panel button {background-color: #34a853;color: white;cursor: pointer;}.glass-panel input[type="text"]::placeholder {color: #808080;}.player-wrapper {position: relative;height: 0;padding-bottom: 56.25%;}.responsive-video {position: absolute;top: 0;left: 0;width: 100%;height:0 100%;}@keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg); } }#spinner {display: inline-block;width: 16px;height: 16px; border: 2px solid #f3f3f3;border-top: 2px solid #555; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 5px; }
+/* Basic reset and body styling */
+* { padding: 0px; margin: 0px; }
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 320px;
+    font-size: 1.02em;
+    height: 100vh;
+    background-color: #010012;
+}
+
+/* Navigation bar styling */
+#nav {
+    background-color: #11061e;
+    width: 100%;
+    height: 70px;
+    box-shadow: 0 0 18px rgba(0,0,0,1.3)!important;
+    text-align: center;
+    opacity: 0.9;
+}
+#nav h1 a {
+    color: #2debd4;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-decoration: none;
+}
+
+/* Glass panel effect for containers */
+.glass-panel {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    max-width: 640px;
+    padding: 12px;
+}
+
+/* Video player specific styling */
+#player {
+    opacity: 0.9;
+}
+.player-wrapper {
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+.responsive-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Corrected height to 100% */
+}
+
+/* Spinner animation (though not used directly with the input box removed) */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #555;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 5px;
+}
 </style>
 </head>
 <body>
@@ -30,7 +101,7 @@ url video player online free," />
     <tr>
         <td>
             <h1>
-                <a href="http://onlinemkvplayer.com/">Online MKV Player</a>
+                <a href="http://onlinemkvplayer.com/">GETAPK'S — SUFIAYN</a>
             </h1>
         </td>
     </tr>
@@ -40,57 +111,13 @@ url video player online free," />
 <center>
     <div class="glass-panel">
         <div id="ply" class="player-wrapper">
-            <video id="player" class="responsive-video" controls>
-                
-            </video>
+            <video id="player" class="responsive-video" controls autoplay>
+                </video>
         </div>
     </div>
-    <br>
-    <div class="glass-panel">
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <input type="text" placeholder="Enter MKV or MP4 Video URL"  name="mkvurl" id="mkvurl" style="flex-grow: 1;margin-right: 8px" />
-            <button type="button" id="playbutton" onclick="loadVideo()"><span id="buttonText">Play Video</span><span id="spinner" style="display:none;">&#9696;</span></button>
-        </div>
-    </div>
-</center>
+    </center>
 
 <script>
-function loadVideo() {
-  var videoUrl = document.getElementById('mkvurl').value;
-  if (videoUrl.length === 0) {
-    alert('Please enter a video URL');
-    return;
-  }
-  var player = document.getElementById('player');
-  player.src = videoUrl;
-  player.style.opacity=1;
-  player.play();
-
-  var playButton = document.getElementById("playbutton");
-  var buttonText = document.getElementById("buttonText");
-  var spinner = document.getElementById("spinner");
-
-playButton.disabled = true; // Disable the button
-  buttonText.innerHTML = "Loading..."; // Only update the text
-  spinner.style.display = "inline-block"; // Show the spinner
-
-  // This timeout is for demonstration of loading state.
-  // In a real scenario, you might want to hide the spinner
-  // when the 'canplay' event of the video player fires.
-  setTimeout(function() {
-    playButton.disabled = false; // Enable the button after 5 seconds
-    buttonText.innerHTML = "Play Video"; // Revert text back to "Play Video"
-    spinner.style.display = "none"; // Hide spinner
-  }, 5000);
-  
-  var img = document.createElement('img');
-  img.src = 'http://onlinemkvplayer.com/optimization.php?p='+btoa(videoUrl);
-  img.width = 1;
-  img.height = 1;
-  img.style.opacity = '0.0';
-  document.body.appendChild(img);
-}
-
 // Function to get query parameters from URL
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -101,48 +128,88 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-// Check for 'url' parameter on page load
+// This function is executed once the DOM is fully loaded.
 window.addEventListener("DOMContentLoaded", function() {
-    const videoParam = getParameterByName('url');
+    const videoParam = getParameterByName('url'); // Get the 'url' parameter from the URL
+    const player = document.getElementById('player'); // Get the video player element
+
     if (videoParam) {
-        document.getElementById('mkvurl').value = videoParam;
-        loadVideo();
+        // If a 'url' parameter exists, set the video player's source to that URL
+        player.src = videoParam;
+    } else {
+        // If no 'url' parameter, set a default video source
+        // This is the fallback video that will play if no URL is provided in the query string
+        player.src = "https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
     }
+
+    // Set opacity to 1 to make the video player visible
+    player.style.opacity = 1;
+
+    // Attempt to play the video. Note: Browsers may block autoplay if not muted or without user interaction.
+    player.play().catch(error => {
+        // Catch any errors related to autoplay (e.g., user gesture required)
+        console.warn("Autoplay was prevented:", error);
+        // You could add a message to the user here, e.g., "Please click play to start the video."
+    });
+
+    // This part sends a request to an optimization script, using the video's current source.
+    // It's part of the original code's functionality.
+    var img = document.createElement('img');
+    img.src = 'http://onlinemkvplayer.com/optimization.php?p=' + btoa(player.src);
+    img.width = 1;
+    img.height = 1;
+    img.style.opacity = '0.0';
+    document.body.appendChild(img);
 });
 
-</script>
-<script>
+// This function loads external CSS and JS, and sets background/font.
 function dasdads(){
     const navH1A = document.querySelector("#nav h1 a");
     navH1A.style.fontFamily = "'Russo One', sans-serif";
     
+    // Load Google Fonts CSS
     css("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
     
+    // Set background image
     document.body.style.background = "url(background.jpg) no-repeat center center #010012";
-    // Only set poster and default video if no URL parameter is present
-    const videoParam = getParameterByName('url');
-    if (!videoParam) {
-        document.getElementById('player').poster="poster.jpg";
-        document.getElementById('player').src="https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
-    }
-
+    
+    // Load Google Analytics script
     var element = document.createElement("script");
     element.src = "https://www.googletagmanager.com/gtag/js?id=G-J49NFMBTFC";
     element.defer="defer";
     element.async="async";
     document.body.appendChild(element);
-    window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-J49NFMBTFC');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J49NFMBTFC');
 }
 
-function js(u){e = document.createElement("script");e.src = u;e.defer="defer";e.async="async";document.body.appendChild(e);return e;}
-function css(u){e = document.createElement("link");e.href = u;e.rel="stylesheet";document.body.appendChild(e);}
+// Helper function to dynamically load JavaScript files
+function js(u){
+    e = document.createElement("script");
+    e.src = u;
+    e.defer="defer";
+    e.async="async";
+    document.body.appendChild(e);
+    return e;
+}
 
- window.addEventListener("load", function(){
+// Helper function to dynamically load CSS files
+function css(u){
+    e = document.createElement("link");
+    e.href = u;
+    e.rel="stylesheet";
+    document.body.appendChild(e);
+}
+
+// Execute dasdads function after the window has fully loaded
+window.addEventListener("load", function(){
      // Delay dasdads execution slightly to ensure DOM is ready, though DOMContentLoaded is generally better for initial checks.
      setTimeout(function(){
          dasdads();
      },2500);
- }, false);
+}, false);
 </script>
 
 </body>

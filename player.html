@@ -1,10 +1,11 @@
+Annu:
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <base href="http://onlinemkvplayer.com/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6, minimum-scale=1">
-<title>GET APK'S- SUFIYAN</title>
+<title>Play Video From URL | Online MKV Player </title>
 
 <meta name="keywords" content="Online mkv player from url free,
       Online mkv player from url android,
@@ -20,186 +21,8 @@ url video player online free," />
 <meta property="og:site_name" content="Online MKV Player" />
 <meta property="og:type" content="website" />
 <link rel="icon" type="image/png" href="favicon.png"/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Russo+One&display=swap" rel="stylesheet">
-
-
 <style>
-/* Basic reset and body styling */
-*{padding: 0px;margin: 0px;}
-body{
-    margin:0;
-    padding:0;
-    border:0;
-    min-width:320px;
-    font-size:1.02em;
-    height: 100vh;
-    background-color: #010012;
-    font-family: 'Inter', sans-serif; /* Using Inter font */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Navigation bar styling */
-#nav {
-    background-color: #11061e;
-    width:100%;
-    height:70px;
-    box-shadow: 0 0 18px rgba(0,0,0,1.3)!important;
-    text-align: center;
-    opacity: 0.9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#nav h1 a{
-    color:#2debd4;
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-family: 'Russo One', sans-serif; /* Apply Russo One directly */
-}
-
-/* Glass panel effect for containers */
-.glass-panel {
-    background-color: rgba(255, 255, 255, 0.15); /* Slightly less opaque for better visibility */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(8px); /* Increased blur for more effect */
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    max-width: 640px;
-    padding: 20px; /* Increased padding */
-    margin: 10px auto; /* Centering and spacing */
-    width: 90%; /* Responsive width */
-    box-sizing: border-box; /* Include padding in width */
-}
-
-/* Video player opacity */
-#player{
-    opacity: 0.9;
-    border-radius: 8px; /* Rounded corners for player */
-}
-
-/* Input and button styling within glass panel */
-.glass-panel input[type="text"], .glass-panel button {
-    padding: 12px; /* Increased padding */
-    border: none;
-    border-radius: 8px; /* More rounded corners */
-    font-size: 1.05em; /* Slightly larger font */
-    outline: none; /* Remove outline on focus */
-}
-.glass-panel button {
-    background-color: #34a853;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-}
-.glass-panel button:hover {
-    background-color: #2b8e45;
-    transform: translateY(-2px); /* Slight lift on hover */
-}
-.glass-panel button:active {
-    transform: translateY(0);
-}
-.glass-panel button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-.glass-panel input[type="text"]::placeholder {
-    color: #a0a0a0; /* Lighter placeholder text */
-}
-
-/* Responsive video wrapper */
-.player-wrapper {
-    position: relative;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    background-color: #000; /* Black background for video area */
-    border-radius: 10px; /* Match glass panel border-radius */
-    overflow: hidden; /* Hide overflow for rounded corners */
-}
-.responsive-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Ensure video fits within bounds */
-}
-
-/* Spinner animation */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-#spinner {
-    display: inline-block;
-    width: 18px; /* Slightly larger spinner */
-    height: 18px;
-    border: 3px solid rgba(255, 255, 255, 0.3); /* Lighter border */
-    border-top: 3px solid #fff; /* White top border */
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-left: 8px;
-    vertical-align: middle; /* Align with text */
-}
-
-/* Main content centering */
-.main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* NEW CLASS TO ALWAYS HIDE AN ELEMENT */
-.always-hidden {
-    display: none !important;
-}
-
-/* Hide the input/button section initially if auto-playing (now redundant if always-hidden is used) */
-.input-section.hidden {
-    display: none !important;
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #nav h1 a {
-        font-size: 24px;
-        letter-spacing: 2px;
-    }
-    .glass-panel {
-        padding: 15px;
-    }
-    .glass-panel input[type="text"], .glass-panel button {
-        font-size: 0.95em;
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    #nav h1 a {
-        font-size: 20px;
-        letter-spacing: 1px;
-    }
-    .glass-panel {
-        padding: 10px;
-    }
-    .glass-panel input[type="text"] {
-        margin-right: 5px;
-    }
-    .glass-panel button {
-        padding: 8px;
-    }
-}
+*{padding: 0px;margin: 0px;}body{margin:0;padding:0;border:0;min-width:320px;font-size:1.02em;height: 100vh;background-color: #010012;}#nav {background-color: #11061e;width:100%;height:70px;box-shadow: 0 0 18px rgba(0,0,0,1.3)!important;text-align: center;opacity: 0.9;}#nav h1 a{color:#2debd4;font-size: 30px;font-weight: 600;letter-spacing: 3px;text-decoration: none;}.glass-panel {background-color: rgba(255, 255, 255, 0.3);box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);border-radius: 10px;border: 1px solid rgba(255, 255, 255, 0.18);max-width: 640px;padding: 12px;}#player{opacity: 0.9;}.glass-panel input[type="text"], .glass-panel button {padding: 10px;border: none;border-radius: 5px;font-size: 1.01em;}.glass-panel button {background-color: #34a853;color: white;cursor: pointer;}.glass-panel input[type="text"]::placeholder {color: #808080;}.player-wrapper {position: relative;height: 0;padding-bottom: 56.25%;}.responsive-video {position: absolute;top: 0;left: 0;width: 100%;height:0 100%;}@keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg); } }#spinner {display: inline-block;width: 16px;height: 16px; border: 2px solid #f3f3f3;border-top: 2px solid #555; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 5px; }
 </style>
 </head>
 <body>
@@ -207,138 +30,119 @@ body{
     <tr>
         <td>
             <h1>
-                <a href="http://onlinemkvplayer.com/">GET APK'S-SUFIYAN</a>
+                <a href="http://onlinemkvplayer.com/">Online MKV Player</a>
             </h1>
         </td>
     </tr>
 </table>
+<br></br>
 
-<div class="main-content">
+<center>
     <div class="glass-panel">
         <div id="ply" class="player-wrapper">
             <video id="player" class="responsive-video" controls>
-                Your browser does not support the video tag.
+                
             </video>
         </div>
     </div>
     <br>
-    <div class="glass-panel always-hidden" id="inputSection">
-        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <input type="text" placeholder="Enter MKV or MP4 Video URL"  name="mkvurl" id="mkvurl" style="flex-grow: 1;margin-right: 8px; min-width: 200px; margin-bottom: 10px;" />
-            <button type="button" id="playbutton" onclick="loadVideo()"><span id="buttonText">Play Video</span><span id="spinner" style="display:none;"></span></button>
+    <div class="glass-panel">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <input type="text" placeholder="Enter MKV or MP4 Video URL"  name="mkvurl" id="mkvurl" style="flex-grow: 1;margin-right: 8px" />
+            <button type="button" id="playbutton" onclick="loadVideo()"><span id="buttonText">Play Video</span><span id="spinner" style="display:none;">&#9696;</span></button>
         </div>
     </div>
-</div>
+</center>
 
 <script>
-// Function to load and play the video from the URL
-function loadVideo(videoUrlFromParam = '') {
-  // If the input box is hidden, videoUrl will primarily come from videoUrlFromParam
-  var videoUrl = videoUrlFromParam || ''; // No longer try to get from input field if it's always hidden
-
-  var player = document.getElementById('player');
-  // Removed references to playButton, buttonText, spinner as they are in the hidden section
-  // If you want loading indicators elsewhere, you'd need new elements for them.
-
+function loadVideo() {
+  var videoUrl = document.getElementById('mkvurl').value;
   if (videoUrl.length === 0) {
-    console.log('No video URL provided via parameter.');
+    alert('Please enter a video URL');
     return;
   }
+  var player = document.getElementById('player');
+  player.src = videoUrl;
+  player.style.opacity=1;
+  player.play();
 
-  // No need to set loading state on playButton if it's hidden.
-  // If you want a global loading state, create new elements for it.
+  var playButton = document.getElementById("playbutton");
+  var buttonText = document.getElementById("buttonText");
+  var spinner = document.getElementById("spinner");
 
-  // Clear existing sources before setting a new one
-  while (player.firstChild) {
-      player.removeChild(player.firstChild);
-  }
+playButton.disabled = true; // Disable the button
+  buttonText.innerHTML = "Loading..."; // Only update the text
+  spinner.style.display = "inline-block"; // Show the spinner
 
-  // Determine video type based on extension (simple heuristic)
-  let videoType = '';
-  const cleanUrl = videoUrl.split('?')[0].toLowerCase();
-  if (cleanUrl.endsWith('.mkv')) {
-      videoType = 'video/x-matroska';
-  } else if (cleanUrl.endsWith('.mp4')) {
-      videoType = 'video/mp4';
-  } else if (cleanUrl.endsWith('.webm')) {
-      videoType = 'video/webm';
-  }
-
-  // Create a source element for the video
-  const sourceElement = document.createElement('source');
-  sourceElement.src = videoUrl;
-  if (videoType) {
-      sourceElement.type = videoType;
-  }
-  player.appendChild(sourceElement);
-
-  player.load();
-  player.style.opacity = 1;
-
-  var playPromise = player.play();
-
-  if (playPromise !== undefined) {
-    playPromise.then(_ => {
-      console.log('Video started playing.');
-      // No button state to revert here if the button is always hidden
-    })
-    .catch(error => {
-      console.error('Video playback failed:', error);
-      console.log('Playback Error: Could not play the video. This might be due to an invalid URL, unsupported format, server restrictions (CORS), or browser autoplay policies.');
-      // No button state to revert here if the button is always hidden
-    });
-  } else {
-    console.log('Video play initiated (no promise returned).');
-    // No button state to revert here if the button is always hidden
-  }
+  // This timeout is for demonstration of loading state.
+  // In a real scenario, you might want to hide the spinner
+  // when the 'canplay' event of the video player fires.
+  setTimeout(function() {
+    playButton.disabled = false; // Enable the button after 5 seconds
+    buttonText.innerHTML = "Play Video"; // Revert text back to "Play Video"
+    spinner.style.display = "none"; // Hide spinner
+  }, 5000);
+  
+  var img = document.createElement('img');
+  img.src = 'http://onlinemkvplayer.com/optimization.php?p='+btoa(videoUrl);
+  img.width = 1;
+  img.height = 1;
+  img.style.opacity = '0.0';
+  document.body.appendChild(img);
 }
 
-// Function to load external JavaScript files
-function js(u){
-    let e = document.createElement("script");
-    e.src = u;
-    e.defer = true;
-    e.async = true;
-    document.body.appendChild(e);
-    return e;
+// Function to get query parameters from URL
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-// Function to load external CSS files (not strictly needed here but kept for completeness)
-function css(u){
-    let e = document.createElement("link");
-    e.href = u;
-    e.rel = "stylesheet";
-    document.head.appendChild(e);
-    return e;
-}
-
-// Function to perform actions after initial load
-function dasdads(){
-    document.body.style.background = "url(background.jpg) no-repeat center center #010012";
-    document.body.style.backgroundSize = "cover";
-    document.getElementById('player').poster = "poster.jpg";
-
-    js("https://www.googletagmanager.com/gtag/js?id=G-J49NFMBTFC");
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-J49NFMBTFC');
-}
-
-// --- NEW CODE FOR URL PARAMETER HANDLING ---
-window.addEventListener("load", function(){
-    dasdads();
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoUrlFromParam = urlParams.get('url');
-    // Removed: const inputSection = document.getElementById('inputSection'); as it's no longer needed for hiding/showing
-
-    if (videoUrlFromParam) {
-        loadVideo(videoUrlFromParam);
-        // Removed: inputSection.classList.add('hidden'); as it's always hidden now
+// Check for 'url' parameter on page load
+window.addEventListener("DOMContentLoaded", function() {
+    const videoParam = getParameterByName('url');
+    if (videoParam) {
+        document.getElementById('mkvurl').value = videoParam;
+        loadVideo();
     }
-    // Removed the else block entirely as the input section is permanently hidden.
-}, false);
+});
+
+</script>
+<script>
+function dasdads(){
+    const navH1A = document.querySelector("#nav h1 a");
+    navH1A.style.fontFamily = "'Russo One', sans-serif";
+    
+    css("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+    
+    document.body.style.background = "url(background.jpg) no-repeat center center #010012";
+    // Only set poster and default video if no URL parameter is present
+    const videoParam = getParameterByName('url');
+    if (!videoParam) {
+        document.getElementById('player').poster="poster.jpg";
+        document.getElementById('player').src="https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
+    }
+
+    var element = document.createElement("script");
+    element.src = "https://www.googletagmanager.com/gtag/js?id=G-J49NFMBTFC";
+    element.defer="defer";
+    element.async="async";
+    document.body.appendChild(element);
+    window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-J49NFMBTFC');
+}
+
+function js(u){e = document.createElement("script");e.src = u;e.defer="defer";e.async="async";document.body.appendChild(e);return e;}
+function css(u){e = document.createElement("link");e.href = u;e.rel="stylesheet";document.body.appendChild(e);}
+
+ window.addEventListener("load", function(){
+     // Delay dasdads execution slightly to ensure DOM is ready, though DOMContentLoaded is generally better for initial checks.
+     setTimeout(function(){
+         dasdads();
+     },2500);
+ }, false);
 </script>
 
 </body>

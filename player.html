@@ -139,17 +139,70 @@ function getParameterByName(name, url = window.location.href) {
 
 // This function is executed once the DOM is fully loaded.
 window.addEventListener("DOMContentLoaded", function() {
-    const videoParam = getParameterByName('url'); // Get the 'url' parameter from the URL
     const player = document.getElementById('player'); // Get the video player element
+    const videoParam = getParameterByName('url'); // Get the 'url' parameter from the URL
 
-    if (videoParam) {
-        // If a 'url' parameter exists, set the video player's source to that URL
-        player.src = videoParam;
-    } else {
-        // If no 'url' parameter, set a default video source
-        // This is the fallback video that will play if no URL is provided in the query string
-        player.src = "https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
+    // --- Start of NEW CODE for Resume Playback Feature ---
+    const VIDEO_PROGRESS_KEY = 'videoPlaybackProgress'; // Key for storing data in localStorage
+    let savedProgress = null;
+
+    try {
+        const storedData = localStorage.getItem(VIDEO_PROGRESS_KEY);
+        if (storedData) {
+            savedProgress = JSON.parse(storedData);
+        }
+    } catch (e) {
+        console.error("Error parsing saved progress from localStorage:", e);
+        // Clear corrupted data if parsing fails
+        localStorage.removeItem(VIDEO_PROGRESS_KEY);
     }
+
+    // Function to save current video and timestamp
+    function savePlaybackProgress() {
+        if (player.src && !player.paused) { // Only save if a video is loaded and playing/paused
+            const progress = {
+                url: player.src,
+                time: player.currentTime
+            };
+            localStorage.setItem(VIDEO_PROGRESS_KEY, JSON.stringify(progress));
+            console.log("Saved playback progress:", progress);
+        } else if (player.src && player.ended) { // If video finished, clear progress
+            localStorage.removeItem(VIDEO_PROGRESS_KEY);
+            console.log("Video finished, cleared playback progress.");
+        }
+    }
+
+    // Event listener for when the video is paused
+    player.addEventListener('pause', savePlaybackProgress);
+    // Event listener for when the video ends
+    player.addEventListener('ended', savePlaybackProgress);
+    // Event listener for when the user navigates away or closes the tab
+    window.addEventListener('beforeunload', savePlaybackProgress);
+
+    // Determine which video to load and from where
+    if (videoParam) {
+        // If a URL is provided in the query parameter, always use that
+        player.src = videoParam;
+        // If the saved progress matches this URL, set the current time
+        if (savedProgress && savedProgress.url === player.src) {
+            player.currentTime = savedProgress.time;
+            console.log("Resuming video from:", savedProgress.time, "seconds");
+        } else {
+            // If a new URL is provided, clear any old saved progress for a different video
+            localStorage.removeItem(VIDEO_PROGRESS_KEY);
+            console.log("New URL provided, starting from beginning.");
+        }
+    } else if (savedProgress && savedProgress.url) {
+        // If no URL in query, but there's saved progress, load that video
+        player.src = savedProgress.url;
+        player.currentTime = savedProgress.time;
+        console.log("Resuming previously watched video from:", savedProgress.time, "seconds");
+    } else {
+        // Fallback if no URL and no saved progress
+        player.src = "https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
+        console.log("Loading default video.");
+    }
+    // --- End of NEW CODE for Resume Playback Feature ---
 
     // Set opacity to 1 to make the video player visible
     player.style.opacity = 1;

@@ -20,3 +20,6 @@ https://pub-082321c8642c40558be40256769ac88d.r2.dev/hbfta9/Good%20Bad%20Ugly%20%
 #EXTM3U
 #EXTINF:1 tvg-name="arnav" tvg-logo="https://i.imgur.com/32W50Y6.png" group-title="arnav",arnav
 http://nonamevos.com:80/movie/junior/junior/136717.mkv
+#EXTM3U
+#EXTINF:1 tvg-name="housefull5" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Housefull_5.jpg/250px-Housefull_5.jpg" group-title="housefull 5",housefull5
+https://pub-ed0ca22af5c04301b7abe9dac4aaf9bc.r2.dev/Housefull%205B%202025%20Hindi%20HQ%20HDTC%201080p%20x264%20CineVood.mkv

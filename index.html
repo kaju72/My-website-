@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>Welcome to Digital Movies</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/ElH_LEMzUtOJNweZBZ1QAZZDHzxgSja6DKYCevqihEYWGHLM6eFIP1JDYR25QRbF1w=s48-rw">
+    <meta name="robots" content="noindex">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+        body {
+            background: #000000; /* Changed to black */
+            animation: fadeIn 0.8s ease-out;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif; /* Modern font */
+            min-height: 100vh;
+            color: #eee; /* Changed text color for contrast */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Background animated blobs */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px); /* Increased blur */
+            opacity: 0.6;
+            animation: floatBackground 15s ease-in-out infinite alternate;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 105, 135, 0.4); /* Pinkish */
+            top: -50px;
+            left: -50px;
+            border-radius: 60% 40% 70% 30% / 30% 60% 40% 70%;
+        }
+
+        body::after {
+            width: 350px;
+            height: 350px;
+            background: rgba(100, 200, 255, 0.4); /* Bluish */
+            bottom: -70px;
+            right: -70px;
+            border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatBackground {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(20px, 15px) rotate(5deg) scale(1.02); }
+            50% { transform: translate(0, 30px) rotate(0deg) scale(1); }
+            75% { transform: translate(-20px, 15px) rotate(-5deg) scale(1.02); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        }
+
+        #jtvh1 h1 {
+            font-size: 3.5rem; /* Larger font size */
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff6f61, #ffbf00); /* Vibrant, warm gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Stronger shadow for dark background */
+            transition: all 0.4s ease;
+            display: inline-block;
+            padding: 15px 30px; /* More padding */
+            border-radius: 15px; /* Softer corners */
+            margin: 20px 0; /* More margin */
+            letter-spacing: 2px; /* Increased letter spacing */
+            position: relative; /* For pseudo-elements */
+            overflow: hidden; /* For shine effect */
+        }
+
+        #jtvh1 h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.7s ease;
+        }
+
+        #jtvh1 h1:hover::before {
+            left: 100%;
+        }
+
+        #jtvh1 h1:hover {
+            transform: scale(1.03) translateY(-3px); /* Subtler scale, slight lift */
+            text-shadow: 0 6px 12px rgba(0,0,0,0.4); /* Even stronger shadow */
+            animation: none; /* Disable pulse on hover to allow shine */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* Telegram button in original colors */
+        .telegram-btn {
+            border-radius: 30px; /* Larger radius */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+            border: none;
+            padding: 0;
+            overflow: hidden;
+            display: inline-block;
+            background: transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-5px) scale(1.05); /* Lift and slight scale */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25); /* Deeper shadow */
+        }
+
+        .container {
+            background: transparent;
+            padding: 30px 0; /* More padding */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        /* Movie List Styles */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Increased gap */
+            margin: 30px 0; /* More margin */
+            flex-wrap: wrap;
+            background: #222; /* Darker background for controls */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Soft, prominent shadow for dark theme */
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Increased gap */
+            padding: 5px 0; /* Adjusted padding */
+        }
+
+        select, input[type="text"] { /* Target input specifically */
+            padding: 10px 18px; /* More padding */
+            border-radius: 25px; /* More rounded */
+            border: 1px solid #444; /* Darker border color */
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            background: #333; /* Darker input background */
+            color: #eee; /* Light text for input */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); /* Inner shadow */
+            transition: all 0.3s ease;
+        }
+
+        select::placeholder, input[type="text"]::placeholder {
+            color: #bbb; /* Placeholder color */
+        }
+
+        select:focus, input[type="text"]:focus {
+            border-color: #6a82fb; /* Brighter focus border */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 0 8px rgba(106, 130, 251, 0.5); /* Outer glow on focus */
+        }
+
+        button {
+            padding: 10px 25px; /* More padding */
+            border-radius: 25px; /* More rounded */
+            border: none;
+            background: linear-gradient(135deg, #6a82fb, #fc5c7d); /* Fresh, inviting gradient */
+            color: white;
+            font-weight: 600; /* Bolder font */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Enhanced shadow */
+            font-size: 1em;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.02); /* More pronounced lift and scale */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4); /* Deeper shadow */
+            background: linear-gradient(135deg, #fc5c7d, #6a82fb); /* Reverse gradient on hover */
+        }
+
+        button:disabled {
+            background: #555; /* Darker disabled background */
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        #movie-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Larger card size */
+            gap: 25px; /* Increased gap */
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            background: #1a1a1a; /* Dark background for cards */
+            border-radius: 20px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Soft, prominent shadow */
+            transition: all 0.4s ease;
+            text-align: center;
+            padding: 20px; /* More padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #eee; /* Light text color for card content */
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px) scale(1.02); /* More pronounced lift and scale */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.6); /* Deeper shadow */
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a); /* Subtle gradient on hover */
+        }
+
+        .movie-poster-container {
+            width: 100%;
+            height: 250px; /* Taller for movie posters */
+            margin: 0 auto 15px; /* More margin */
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .movie-poster {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px; /* Slightly rounded posters */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow on poster */
+            object-fit: cover; /* Ensure posters cover the container */
+        }
+
+        .movie-card:hover .movie-poster {
+            transform: scale(1.08); /* More noticeable scale */
+        }
+
+        .movie-title {
+            margin: 0;
+            font-weight: 700; /* Bolder name */
+            color: #eee; /* Light color for title */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.1em; /* Slightly larger font */
+            padding-top: 10px;
+        }
+
+        .page-info {
+            text-align: center;
+            margin: 25px 0; /* More margin */
+            font-weight: 600;
+            color: #bbb; /* Lighter color for page info */
+            font-size: 1.1em;
+        }
+
+        /* Watch History Styles */
+        .watch-history-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%); /* Darker background for history */
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5); /* More prominent shadow for dark theme */
+            text-align: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative; /* For potential absolute positioning of elements */
+        }
+
+        .watch-history-section h2 {
+            font-size: 1.8rem; /* Larger title */
+            color: #eee; /* Light text for title */
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A); /* Fresh green gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        #watch-history-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px; /* Increased gap */
+            max-height: 180px; /* Slightly taller */
+            overflow-y: auto;
+            padding: 10px; /* More padding */
+            border-radius: 15px;
+            background: rgba(30,30,30,0.6); /* Darker, subtle background */
+            box-shadow: inset 0 3px 8px rgba(0,0,0,0.3); /* Deeper inner shadow */
+            scrollbar-width: thin; /* Firefox scrollbar */
+            scrollbar-color: #6a82fb #222; /* Dark theme scrollbar colors */
+        }
+
+        /* Webkit scrollbar for Chrome/Safari */
+        #watch-history-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #watch-history-list::-webkit-scrollbar-track {
+            background: #222; /* Dark scrollbar track */
+            border-radius: 10px;
+        }
+
+        #watch-history-list::-webkit-scrollbar-thumb {
+            background: #6a82fb; /* Matching button gradient */
+            border-radius: 10px;
+            border: 2px solid #222;
+        }
+
+        #watch-history-list::-webkit-scrollbar-thumb:hover {
+            background: #fc5c7d; /* Hover color */
+        }
+
+
+        .history-item {
+            display: flex;
+            flex-direction: column; /* Stack poster and title */
+            align-items: center;
+            justify-content: center;
+            gap: 5px; /* Smaller gap between poster and title */
+            background: #222; /* Dark background for history items */
+            padding: 10px; /* More padding */
+            border-radius: 18px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Softer shadow */
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85em; /* Slightly smaller font */
+            color: #ccc; /* Light text for history item */
+            flex-shrink: 0;
+            width: 90px; /* Fixed width for better grid alignment */
+            text-align: center;
+        }
+
+        .history-item:hover {
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Deeper shadow */
+            background: linear-gradient(45deg, #333, #222); /* Subtle dark gradient */
+        }
+
+        .history-item-poster {
+            width: 50px; /* Larger poster */
+            height: 50px; /* Larger poster */
+            border-radius: 50%; /* Make it circular like a logo */
+            object-fit: cover; /* Cover the area */
+            border: 2px solid #333; /* Dark border */
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow on poster */
+        }
+
+        .history-item-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%; /* Ensure text fits within item width */
+            font-weight: 600; /* Bolder name */
+            margin-top: 5px; /* Space from poster */
+        }
+
+        .clear-history-btn {
+            margin-top: 20px; /* More margin */
+            background: linear-gradient(135deg, #ff4d4d, #ff8080); /* Brighter red gradient */
+            font-size: 0.95em;
+            padding: 8px 20px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Soft shadow */
+        }
+
+        .clear-history-btn:hover {
+            background: linear-gradient(135deg, #ff8080, #ff4d4d); /* Reverse gradient on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* No results message styling */
+        .no-results {
+            color: #bbb; /* Light color for no results text */
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            #jtvh1 h1 {
+                font-size: 2.5rem;
+                padding: 10px 20px;
+            }
+
+            .telegram-btn img {
+                height: 40px;
+                width: 120px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .control-group {
+                width: 100%;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            select, input[type="text"] {
+                width: calc(100% - 36px); /* Adjust for padding */
+                font-size: 0.95em;
+            }
+
+            button {
+                width: 100%; /* Full width buttons on mobile */
+                font-size: 0.95em;
+                padding: 10px 15px;
+            }
+
+            #movie-list {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Smaller cards for mobile */
+                gap: 15px;
+            }
+
+            .movie-card {
+                padding: 10px;
+            }
+
+            .movie-poster-container {
+                height: 180px; /* Adjusted height for mobile posters */
+                margin-bottom: 10px;
+            }
+
+            .movie-title {
+                font-size: 1em;
+            }
+
+            .watch-history-section {
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            .watch-history-section h2 {
+                font-size: 1.4rem;
+            }
+
+            #watch-history-list {
+                gap: 8px;
+                max-height: 120px; /* Shorter on mobile */
+            }
+
+            .history-item {
+                width: 75px; /* Smaller fixed width */
+                padding: 8px;
+            }
+
+            .history-item-poster {
+                width: 40px;
+                height: 40px;
+            }
+
+            .clear-history-btn {
+                font-size: 0.85em;
+                padding: 6px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Popunder (loads early in body) -->
+<script type='text/javascript' src='//pl26860845.profitableratecpm.com/2a/fb/9b/2afb9bcbac24932c5a9d6d9b476c75f5.js'></script>
+
+
+    <div id="jtvh1" class="center">
+        <B><h1>Welcome to Digital Movies</h1></B>
+    </div>
+
+    <div class="watch-history-section">
+        <h2>Your Recent Movies</h2>
+        <div id="watch-history-list">
+            <p id="no-history-message">No recent movies yet. Start watching!</p>
+        </div>
+        <button id="clear-history-btn" class="clear-history-btn" style="display: none;">Clear History</button>
+    </div>
+    <center>
+    <p>
+    <p>
+        <a href='https://t.me/dogitalworld' target='_blank' class="telegram-btn">
+            <img src="https://i.postimg.cc/KjZjJWRM/telegram.jpg" height="50" width="150" style="border-radius: 25px;">
+        </a>
+        <br>
+    </center>
+    <br>
+
+    <div class="container">
+        <div class="controls">
+            <div class="control-group">
+                <input type="text" id="search-input" placeholder="Search movies..." autocomplete="off">
+            </div>
+            <div class="control-group">
+                <select id="category-select">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <button id="prev-page">Previous</button>
+                <span id="page-info" class="page-info">Loading...</span>
+                <button id="next-page">Next</button>
+            </div>
+        </div>
+
+        <div id="movie-list"></div>
+    </div>
+
+    <script>
+        // Configuration
+        const MOVIES_PER_PAGE = 24; // Adjusted for movie posters
+        const DEFAULT_POSTER = 'https://i.ibb.co/k6mTy71V/x.jpg'; // Placeholder for missing posters
+        const MAX_HISTORY_ITEMS = 10; // Limit the number of history items
+
+        // State variables
+        let movies = [];
+        let currentPage = 1;
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let watchHistory = []; // Array to store watch history
+
+        // DOM Elements
+        const movieList = document.getElementById('movie-list');
+        const searchInput = document.getElementById('search-input');
+        const categorySelect = document.getElementById('category-select'); // Changed ID
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const pageInfo = document.getElementById('page-info');
+        const watchHistoryList = document.getElementById('watch-history-list');
+        const noHistoryMessage = document.getElementById('no-history-message');
+        const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load movies from M3U (or a simulated movie data source)
+            loadMovies();
+            // Load watch history from local storage
+            loadWatchHistory();
+            // Display watch history
+            renderWatchHistory();
+
+            // Setup event listeners
+            searchInput.addEventListener('input', handleSearch);
+            categorySelect.addEventListener('change', handleCategoryChange); // Changed event listener
+            prevPageBtn.addEventListener('click', goToPrevPage);
+            nextPageBtn.addEventListener('click', goToNextPage);
+            clearHistoryBtn.addEventListener('click', clearWatchHistory);
+        });
+
+        // Load movies from a data source
+        // For demonstration, I'm simulating movie data as a standard M3U might not contain rich movie metadata.
+        // In a real scenario, you'd parse a JSON file, a dedicated movie database API, or an M3U with custom tags.
+        async function loadMovies() {
+            try {
+                pageInfo.textContent = 'Loading movies...';
+
+                // --- IMPORTANT: This part assumes your M3U has movie-specific tags or you're fetching from a different source ---
+                // Original M3U example: #EXTINF:-1 tvg-id="CNN.us" tvg-name="CNN" tvg-logo="https://..." group-title="News",CNN
+                // For movies, you might need custom tags like:
+                // #EXTINF:-1 movie-title="The Matrix" movie-poster="https://example.com/matrix.jpg" genre="Sci-Fi",The Matrix
+                // Or ideally, a JSON array of objects:
+                // [{ title: "The Matrix", poster: "url", url: "stream_url", genre: "Sci-Fi" }]
+
+                // For now, I'll provide a placeholder array of movies for demonstration.
+                // If you intend to use an .m3u, you will need to adjust the parseM3U function accordingly
+                // to extract movie-specific information (e.g., from custom `tvg-movie-poster` or `movie-genre` tags).
+
+                const response = await fetch('https://raw.githubusercontent.com/kaju72/My-website-/refs/heads/main/Movie.m3u'); // Still fetching the original M3U
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const m3uData = await response.text();
+                movies = parseM3UForMovies(m3uData); // Call the new parsing function
+
+                // --- END IMPORTANT ---
+
+
+                // Populate category filter
+                populateCategoryFilter();
+
+                // Display first page
+                displayMovies();
+
+            } catch (error) {
+                console.error('Error loading movies:', error);
+                pageInfo.textContent = 'Error loading movies. Please try again later.';
+                movieList.innerHTML = `<div class="error">Failed to load movies. ${error.message}</div>`;
+            }
+        }
+
+        // Parse M3U file content for movies
+        // This function will need to be adapted based on how movie data is structured in your M3U.
+        // The current M3U is channel-focused, so this is a placeholder.
+        function parseM3UForMovies(data) {
+            const lines = data.split('\n');
+            const parsedMovies = [];
+            let currentMovie = {};
+
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+
+                if (trimmedLine.startsWith('#EXTINF:')) {
+                    if (currentMovie.title) {
+                        parsedMovies.push(currentMovie);
+                    }
+
+                    currentMovie = {};
+
+                    // Extract movie info - Adapt these regexes based on your M3U's movie tags
+                    // For demonstration, mapping channel fields to movie fields
+                    const titleMatch = trimmedLine.match(/,(.+)$/);
+                    const posterMatch = trimmedLine.match(/tvg-logo="([^"]*)"/); // Assuming tvg-logo is used for poster
+                    const categoryMatch = trimmedLine.match(/group-title="([^"]*)"/); // Assuming group-title is used for genre/category
+
+                    currentMovie.title = titleMatch ? titleMatch[1].trim() : 'Unknown Movie';
+                    currentMovie.poster = posterMatch ? posterMatch[1] : DEFAULT_POSTER;
+                    currentMovie.category = categoryMatch ? categoryMatch[1] : 'Uncategorized';
+
+                } else if (trimmedLine && !trimmedLine.startsWith('#')) {
+                    currentMovie.url = trimmedLine;
+                }
+            }
+
+            if (currentMovie.title) {
+                parsedMovies.push(currentMovie);
+            }
+
+            return parsedMovies;
+        }
+
+
+        // Populate category filter dropdown
+        function populateCategoryFilter() {
+            const categories = [...new Set(movies.map(movie => movie.category))];
+            categories.sort();
+
+            categorySelect.innerHTML = '<option value="all">All Categories</option>';
+
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // Display movies based on current filters and page
+        function displayMovies() {
+            const filteredMovies = movies.filter(movie => {
+                const matchesCategory = currentCategory === 'all' || movie.category === currentCategory;
+                const matchesSearch = !searchQuery ||
+                    movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            const totalPages = Math.max(1, Math.ceil(filteredMovies.length / MOVIES_PER_PAGE));
+            const startIdx = (currentPage - 1) * MOVIES_PER_PAGE;
+            const endIdx = Math.min(startIdx + MOVIES_PER_PAGE, filteredMovies.length);
+            const pageMovies = filteredMovies.slice(startIdx, endIdx);
+
+            renderMovies(pageMovies);
+            updatePaginationControls(filteredMovies.length, totalPages);
+        }
+
+        // Render movie cards
+        function renderMovies(moviesToRender) {
+            if (moviesToRender.length === 0) {
+                movieList.innerHTML = '<div class="no-results">No movies found matching your criteria.</div>';
+                return;
+            }
+
+            movieList.innerHTML = moviesToRender.map(movie => `
+                <div class="movie-card" onclick="playMovie('${encodeURIComponent(movie.url)}', '${encodeURIComponent(movie.title)}', '${encodeURIComponent(movie.poster)}')">
+                    <div class="movie-poster-container">
+                        <img src="${movie.poster}"
+                             alt="${movie.title}"
+                             class="movie-poster"
+                             onerror="this.src='${DEFAULT_POSTER}'">
+                    </div>
+                    <p class="movie-title">${movie.title}</p>
+                </div>
+            `).join('');
+        }
+
+        // Update pagination controls
+        function updatePaginationControls(totalMovies, totalPages) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages} (${totalMovies} movies)`;
+            prevPageBtn.disabled = currentPage <= 1;
+            nextPageBtn.disabled = currentPage >= totalPages;
+        }
+
+        // Event handlers
+        function handleSearch(e) {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            displayMovies();
+        }
+
+        function handleCategoryChange(e) {
+            currentCategory = e.target.value;
+            currentPage = 1;
+            displayMovies();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayMovies();
+            }
+        }
+
+        function goToNextPage() {
+            const filteredMovies = movies.filter(movie => {
+                const matchesCategory = currentCategory === 'all' || movie.category === currentCategory;
+                const matchesSearch = !searchQuery ||
+                    movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            const totalPages = Math.max(1, Math.ceil(filteredMovies.length / MOVIES_PER_PAGE));
+
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayMovies();
+            }
+        }
+
+        // Watch History Functions
+        function loadWatchHistory() {
+            const history = localStorage.getItem('movieWatchHistory'); // Changed key
+            if (history) {
+                watchHistory = JSON.parse(history);
+            }
+        }
+
+        function saveWatchHistory() {
+            localStorage.setItem('movieWatchHistory', JSON.stringify(watchHistory)); // Changed key
+        }
+
+        function addMovieToHistory(url, title, poster) {
+            const movie = { url, title, poster };
+
+            watchHistory = watchHistory.filter(item => item.url !== url);
+
+            watchHistory.unshift(movie);
+
+            if (watchHistory.length > MAX_HISTORY_ITEMS) {
+                watchHistory = watchHistory.slice(0, MAX_HISTORY_ITEMS);
+            }
+
+            saveWatchHistory();
+            renderWatchHistory();
+        }
+
+        function renderWatchHistory() {
+            watchHistoryList.innerHTML = '';
+
+            if (watchHistory.length === 0) {
+                noHistoryMessage.style.display = 'block';
+                clearHistoryBtn.style.display = 'none';
+                watchHistoryList.style.justifyContent = 'center';
+            } else {
+                noHistoryMessage.style.display = 'none';
+                clearHistoryBtn.style.display = 'block';
+                watchHistoryList.style.justifyContent = 'flex-start';
+                watchHistory.forEach(item => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.onclick = () => playMovie(encodeURIComponent(item.url), encodeURIComponent(item.title), encodeURIComponent(item.poster));
+                    historyItem.innerHTML = `
+                        <img src="${item.poster}" alt="${item.title}" class="history-item-poster" onerror="this.src='${DEFAULT_POSTER}'">
+                        <span class="history-item-title">${item.title}</span>
+                    `;
+                    watchHistoryList.appendChild(historyItem);
+                });
+            }
+        }
+
+        function clearWatchHistory() {
+            if (confirm('Are you sure you want to clear your movie watch history?')) {
+                watchHistory = [];
+                saveWatchHistory();
+                renderWatchHistory();
+            }
+        }
+
+        // Play movie function (modified to add to history)
+        function playMovie(url, title, poster) {
+            addMovieToHistory(decodeURIComponent(url), decodeURIComponent(title), decodeURIComponent(poster));
+
+            const playerUrl = `https://digitalworld-iota.vercel.app/player.html?url=${url}`;
+            window.location.href = playerUrl;
+        }
+    </script>
+ Ad (end of body) -->
+<script type='text/javascript' src='//pl26860856.profitableratecpm.com/b1/02/b8/b102b878dad5669421c548f627801c5f.js'></script>
+
+<!-- Banner Ad 728x90 (top of page, after title) -->
+<div style="text-align:center; margin: 10px 0;">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '9ef4bf269520feff44ab8a90f76f3914',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/9ef4bf269520feff44ab8a90f76f3914/invoke.js"></script>
+</div>
+
+<!-- Banner Ad 300x250 (after movie list) -->
+<div style="text-align:center; margin: 30px 0;">
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '940a1c7593ba5875245e12a1fcc71998',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/940a1c7593ba5875245e12a1fcc71998/invoke.js"></script>
+</div>
+
+<!-- Native Banner (bottom) -->
+<div style="text-align:center; margin-top: 30px;">
+    <script async="async" data-cfasync="false" src="//pl26860853.profitableratecpm.com/e6dac6e461dd334405d9e8b743cf64c4/invoke.js"></script>
+    <div id="container-e6dac6e461dd334405d9e8b743cf64c4"></div>
+</div>
+
+</body>
+</html>
+ 

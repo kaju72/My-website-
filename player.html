@@ -94,6 +94,69 @@ body {
     animation: spin 1s linear infinite;
     margin-left: 5px;
 }
+
+/* --- NEW: Resume Playback Dialog CSS --- */
+#resumeDialog {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333; /* Dark background for the dialog */
+    color: #fff; /* White text */
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+    z-index: 1000; /* Ensure it's on top of other content */
+    text-align: center;
+    max-width: 90%; /* Responsive width */
+    width: 350px; /* Max width for larger screens */
+    font-family: Arial, sans-serif; /* A clear font */
+}
+
+#resumeDialog .question-icon {
+    font-size: 50px; /* Larger icon */
+    color: #2debd4; /* Teal color from your theme */
+    margin-bottom: 15px;
+}
+
+#resumeDialog p {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+#resumeDialog button {
+    margin: 0 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#resumeDialog button.yes-button {
+    background-color: #2debd4; /* Teal for Yes */
+    color: #11061e; /* Dark text for Yes */
+    font-weight: bold;
+}
+
+#resumeDialog button.yes-button:hover {
+    background-color: #3af0e0; /* Lighter teal on hover */
+    transform: translateY(-2px);
+}
+
+#resumeDialog button.no-button {
+    background-color: #555; /* Gray for No */
+    color: #fff; /* White text for No */
+}
+
+#resumeDialog button.no-button:hover {
+    background-color: #777; /* Lighter gray on hover */
+    transform: translateY(-2px);
+}
+/* --- END NEW: Resume Playback Dialog CSS --- */
 </style>
 </head>
 <body>
@@ -114,7 +177,14 @@ body {
             <video id="player" class="responsive-video" controls autoplay>
                 </video>
         </div>
-    </div>
+
+        <div id="resumeDialog">
+            <div class="question-icon">?</div>
+            <p id="resumeQuestion">Resume Video<br>Continue from 00:00?</p>
+            <button class="yes-button" id="yesButton">Yes</button>
+            <button class="no-button" id="noButton">No</button>
+        </div>
+        </div>
     </center>
 <script type="text/javascript">
 	atOptions = {
@@ -137,12 +207,28 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// Helper function to format time (seconds to MM:SS)
+function formatTime(seconds) {
+    if (isNaN(seconds) || seconds < 0) return "00:00";
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
 // This function is executed once the DOM is fully loaded.
 window.addEventListener("DOMContentLoaded", function() {
     const player = document.getElementById('player'); // Get the video player element
     const videoParam = getParameterByName('url'); // Get the 'url' parameter from the URL
 
-    // --- Start of NEW CODE for Resume Playback Feature ---
+    // --- NEW: Resume Playback Dialog Elements ---
+    const resumeDialog = document.getElementById('resumeDialog');
+    const resumeQuestion = document.getElementById('resumeQuestion');
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    // --- END NEW: Resume Playback Dialog Elements ---
+
+
+    // --- Start of EXISTING & MODIFIED CODE for Resume Playback Feature ---
     const VIDEO_PROGRESS_KEY = 'videoPlaybackProgress'; // Key for storing data in localStorage
     let savedProgress = null;
 
@@ -159,7 +245,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
     // Function to save current video and timestamp
     function savePlaybackProgress() {
-        if (player.src && !player.paused) { // Only save if a video is loaded and playing/paused
+        // Only save if a video is loaded and playback is not at the very beginning or end
+        if (player.src && player.currentTime > 1 && !player.ended) { // Save if played more than 1 second
             const progress = {
                 url: player.src,
                 time: player.currentTime
@@ -183,36 +270,66 @@ window.addEventListener("DOMContentLoaded", function() {
     if (videoParam) {
         // If a URL is provided in the query parameter, always use that
         player.src = videoParam;
-        // If the saved progress matches this URL, set the current time
+        // If the saved progress matches this URL, show the dialog
         if (savedProgress && savedProgress.url === player.src) {
-            player.currentTime = savedProgress.time;
-            console.log("Resuming video from:", savedProgress.time, "seconds");
+            // --- NEW: Display Resume Dialog ---
+            resumeQuestion.innerHTML = `Resume Video<br>Continue from ${formatTime(savedProgress.time)}?`;
+            resumeDialog.style.display = 'block';
+            // We do NOT call player.play() or set currentTime here yet.
+            // It will be handled by the dialog's Yes/No buttons.
+            console.log("Dialog displayed for resuming video from:", savedProgress.time, "seconds");
+            // --- END NEW: Display Resume Dialog ---
         } else {
-            // If a new URL is provided, clear any old saved progress for a different video
+            // If a new URL is provided or no matching saved progress, start from beginning and clear old progress
             localStorage.removeItem(VIDEO_PROGRESS_KEY);
+            player.play().catch(error => console.warn("Autoplay prevented for new video:", error));
             console.log("New URL provided, starting from beginning.");
         }
     } else if (savedProgress && savedProgress.url) {
-        // If no URL in query, but there's saved progress, load that video
+        // If no URL in query, but there's saved progress, load that video and show dialog
         player.src = savedProgress.url;
-        player.currentTime = savedProgress.time;
-        console.log("Resuming previously watched video from:", savedProgress.time, "seconds");
+        // --- NEW: Display Resume Dialog ---
+        resumeQuestion.innerHTML = `Resume Video<br>Continue from ${formatTime(savedProgress.time)}?`;
+        resumeDialog.style.display = 'block';
+        // We do NOT call player.play() or set currentTime here yet.
+        // It will be handled by the dialog's Yes/No buttons.
+        console.log("Dialog displayed for resuming previously watched video from:", savedProgress.time, "seconds");
+        // --- END NEW: Display Resume Dialog ---
     } else {
         // Fallback if no URL and no saved progress
         player.src = "https://filesamples.com/samples/video/mkv/sample_960x400_ocean_with_audio.mkv";
+        player.play().catch(error => console.warn("Autoplay prevented for default video:", error));
         console.log("Loading default video.");
     }
-    // --- End of NEW CODE for Resume Playback Feature ---
+    // --- End of EXISTING & MODIFIED CODE for Resume Playback Feature ---
+
+
+    // --- NEW: Resume Playback Dialog Logic ---
+    yesButton.addEventListener('click', () => {
+        const currentSavedProgress = JSON.parse(localStorage.getItem(VIDEO_PROGRESS_KEY));
+        if (currentSavedProgress && currentSavedProgress.url === player.src) {
+            player.currentTime = currentSavedProgress.time;
+            console.log("User chose to resume from:", currentSavedProgress.time);
+        } else {
+            player.currentTime = 0; // Fallback if data is inconsistent
+            console.log("User chose to resume, but saved data was inconsistent. Starting from 0.");
+        }
+        player.play().catch(error => console.warn("Autoplay prevented after 'Yes':", error));
+        resumeDialog.style.display = 'none'; // Hide the dialog
+    });
+
+    noButton.addEventListener('click', () => {
+        player.currentTime = 0; // Start from the beginning
+        localStorage.removeItem(VIDEO_PROGRESS_KEY); // Clear saved position for this video
+        console.log("User chose NOT to resume. Starting from 0 and cleared saved progress.");
+        player.play().catch(error => console.warn("Autoplay prevented after 'No':", error));
+        resumeDialog.style.display = 'none'; // Hide the dialog
+    });
+    // --- END NEW: Resume Playback Dialog Logic ---
+
 
     // Set opacity to 1 to make the video player visible
     player.style.opacity = 1;
-
-    // Attempt to play the video. Note: Browsers may block autoplay if not muted or without user interaction.
-    player.play().catch(error => {
-        // Catch any errors related to autoplay (e.g., user gesture required)
-        console.warn("Autoplay was prevented:", error);
-        // You could add a message to the user here, e.g., "Please click play to start the video."
-    });
 
     // This part sends a request to an optimization script, using the video's current source.
     // It's part of the original code's functionality.
@@ -227,7 +344,9 @@ window.addEventListener("DOMContentLoaded", function() {
 // This function loads external CSS and JS, and sets background/font.
 function dasdads(){
     const navH1A = document.querySelector("#nav h1 a");
-    navH1A.style.fontFamily = "'Russo One', sans-serif";
+    if (navH1A) { // Add a check to ensure element exists
+        navH1A.style.fontFamily = "'Russo One', sans-serif";
+    }
     
     // Load Google Fonts CSS
     css("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");

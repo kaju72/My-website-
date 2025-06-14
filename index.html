@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to DigitalWorld Movie</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #000000, #1c1c1c);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+      padding: 30px;
+      max-width: 800px;
+      margin: 20px;
+    }
+
+    .rainbow-text {
+      font-size: 2.5em;
+      font-weight: bold;
+      background-image: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        violet
+      );
+      background-size: 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 4s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% {
+        background-position: 0%;
+      }
+      100% {
+        background-position: 100%;
+      }
+    }
+
+    p {
+      color: #eee;
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+
+    .telegram-button {
+      background-color: #0088cc;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .telegram-button:hover {
+      background-color: #005f8d;
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="rainbow-text">Welcome to DigitalWorld Movie 🎥</div>
+    <p class="rainbow-text" style="font-size: 1.5em;">All new old movie, anime, cartoon, web series — all type video free 🥰</p>
+    <p>Please join our Telegram channel below:</p>
+    <a class="telegram-button" href="https://t.me/+3CEI5lJ1r_4wMzc1" target="_blank">Join Telegram</a>
+    <img src="https://i.ibb.co/0pBNYDT9/x.jpg" alt="DigitalWorld Image">
+  </div>
+</body>
+</html>
